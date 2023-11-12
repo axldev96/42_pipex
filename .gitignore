@@ -1,0 +1,7 @@
+*.txt
+**/*.o
+**/*.a
+tags
+pipex
+.dSYM
+outfile
