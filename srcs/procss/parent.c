@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:06 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 08:04:08 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 08:27:25 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	parent(t_pipx *pipx)
 {
 	int	fd[2];
 	int	fd_aux[2];
+	int	fd_tmp[2];
 
 	if (pipe(fd) == SYSCALL_ERROR)
 	{
@@ -35,6 +36,8 @@ void	parent(t_pipx *pipx)
 		exit(EXIT_FAILURE);
 	}
 	first_child(pipx, fd);
+	fd_tmp[0] = fd[0];
+	fd_tmp[1] = fd[1];
 	close(fd[1]);
 	while (pipx->command_count)
 	{
@@ -44,11 +47,10 @@ void	parent(t_pipx *pipx)
 			printf("pipe(): middle function error\n");
 			exit(EXIT_FAILURE);
 		}
-		middle_child(pipx, fd, fd_aux);
-		close(fd[0]);
+		middle_child(pipx, fd_tmp, fd_aux);
 		close(fd_aux[1]);
-		//fd[0] = fd_aux[0];
-		//fd[1] = fd_aux[1];
+		fd_tmp[0] = fd_aux[0];
+		fd_tmp[1] = fd_aux[1];
 		pipx->command_count--;
 	}
 	++pipx->exec_av_count;
