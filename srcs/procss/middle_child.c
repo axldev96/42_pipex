@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:47:41 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 09:11:54 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:58:20 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 {
-	char *fake;
+	char	*cmd_path;
 	pid_t	last_pid;
 
-	fake = get_path(pipx, pipx->execve_av[pipx->exec_av_count][0]);
+	cmd_path = get_path(pipx, pipx->execve_av[++pipx->exec_av_count][0]);
 	last_pid = fork();
 	if (last_pid == SYSCALL_ERROR)
 	{
@@ -33,7 +33,9 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 		dup2(fd_aux[1], 1);
 		close(fd[0]);
 		close(fd_aux[1]);
-		execve(fake, pipx->execve_av[pipx->exec_av_count], pipx->env);
+		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
 		perror("execve");
 	}
+	else
+		ft_free((void *)&cmd_path);
 }
