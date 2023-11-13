@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:31:44 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/13 08:02:00 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/13 09:18:23 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_FILES = procss/parent.c \
 			 utils/set_pipx.c \
 			 utils/get_path.c \
 			 utils/get_execve_av.c \
+			 utils/heredoc.c \
 			 args/args.c \
 			 main.c
 

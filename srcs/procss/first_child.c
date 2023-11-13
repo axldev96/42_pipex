@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:55:23 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 07:56:25 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:11:44 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	first_child(t_pipx *pipx, int *fd)
 {
-	char *fake; //= { "ping", "-c", "2", "google.com", NULL };
+	char *fake;
 	pid_t	first_pid;
 
 	fake = get_path(pipx, pipx->execve_av[pipx->exec_av_count][0]);

@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:32:49 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 07:54:43 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:18:43 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_pipx
 // UTILS
 void	set_pipx(t_pipx *pipx, int ac, char **av, char **env);
 void	get_execve_av(t_pipx *pipx);
+void	heredoc(t_pipx *pipx);
 
 // PROCSS
 void	parent(t_pipx *pipx);

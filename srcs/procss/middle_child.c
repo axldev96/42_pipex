@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 00:47:41 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 07:58:23 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:11:54 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 {
-	char *fake; // = { "cat", "-e", NULL };
+	char *fake;
 	pid_t	last_pid;
 
 	fake = get_path(pipx, pipx->execve_av[pipx->exec_av_count][0]);
