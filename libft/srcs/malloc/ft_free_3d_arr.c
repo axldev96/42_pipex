@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free_3d_arr.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 22:34:22 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 07:41:40 by acaceres         ###   ########.fr       */
+/*   Created: 2023/11/13 07:30:30 by acaceres          #+#    #+#             */
+/*   Updated: 2023/11/13 07:38:29 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_free_3d_arr(void ****ptr)
 {
-	t_pipx	pipx;
+	int	i;
 
-	if (ac < 4 && av && env)
-		return (printf("av error\n"), 0);
-	set_pipx(&pipx, ac, av, env);
-	//char	*path = get_path(&pipx, av[2]);
-	//printf("command: %s\n", path);
-	//init_pipex(&pipx);
-	args(&pipx);
-	get_execve_av(&pipx);
-	parent(&pipx);
-	return (0);
+	i = 0;
+	if (!*ptr)
+		return ;
+	while ((*ptr)[i])
+		ft_free_2d_arr(&(*ptr)[i++]);
+	ft_free((void *)ptr);
 }

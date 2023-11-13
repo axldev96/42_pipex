@@ -5,30 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 23:02:04 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/12 17:46:44 by acaceres         ###   ########.fr       */
+/*   Created: 2023/11/13 00:47:41 by acaceres          #+#    #+#             */
+/*   Updated: 2023/11/13 07:58:23 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	middle_child(t_pipx *pipx, int *fd)
+void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 {
-	char *fake[] = { "grep", "-i", "name", NULL };
-	pid_t	middle_pid = fork();
+	char *fake; // = { "cat", "-e", NULL };
+	pid_t	last_pid;
 
-	if (middle_pid == SYSCALL_ERROR)
+	fake = get_path(pipx, pipx->execve_av[pipx->exec_av_count][0]);
+	last_pid = fork();
+	if (last_pid == SYSCALL_ERROR)
 	{
 		printf("error in fork middle child\n");
 		exit(EXIT_FAILURE);
 	}
-	if (middle_pid == 0)
+	if (last_pid == 0)
 	{
+		printf("In the middle\n");
 		close(fd[1]);
+		close(fd_aux[0]);
 		dup2(fd[0], 0);
-		dup2(pipx->outfile, 1);
+		dup2(fd_aux[1], 1);
 		close(fd[0]);
-		execve("/bin/grep", fake, pipx->env);
+		close(fd_aux[1]);
+		execve(fake, pipx->execve_av[pipx->exec_av_count], pipx->env);
 		perror("execve");
 	}
 }

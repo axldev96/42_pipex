@@ -6,7 +6,7 @@
 /*   By: acaceres <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 00:23:46 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/06 04:25:04 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/13 07:34:04 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char				*get_next_line(int fd);
 
 // Extra
 void				ft_free_2d_arr(void	***ptr);
+void				ft_free_3d_arr(void ****ptr);
 void				ft_free_args(size_t argc, ...);
 void				ft_free(void **ptr);
 

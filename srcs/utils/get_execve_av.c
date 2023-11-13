@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.c                                             :+:      :+:    :+:   */
+/*   get_execve_av.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/11 22:38:07 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 00:07:10 by acaceres         ###   ########.fr       */
+/*   Created: 2023/11/13 06:11:13 by acaceres          #+#    #+#             */
+/*   Updated: 2023/11/13 07:39:38 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	args(t_pipx *pipx)
+void	get_execve_av(t_pipx *pipx)
 {
-	pipx->infile = open(pipx->av[1], O_RDONLY);
-	if (pipx->infile == SYSCALL_ERROR)
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 2;
+	pipx->execve_av = malloc(sizeof(char *) * (pipx->ac - 3 + 1));
+	if (!pipx->execve_av)
+		return ;
+	while (i < (pipx->ac - 1))
 	{
-		printf("Infile open error\n");
-		exit(EXIT_FAILURE);
+		pipx->execve_av[j] = ft_split(pipx->av[i], ' ');
+		j++;
+		i++;
 	}
-	pipx->outfile = open(pipx->av[pipx->ac - 1],
-			O_CREAT | O_WRONLY | O_TRUNC,
-			S_IRUSR | S_IWUSR);
-	if (pipx->outfile == SYSCALL_ERROR)
-	{
-		printf("outfile open error\n");
-		exit(EXIT_FAILURE);
-	}
-	pipx->command_count = pipx->ac - 5;
+	pipx->execve_av[j] = NULL;
 }

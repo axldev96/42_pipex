@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/01 07:08:03 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/08 11:07:19 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/13 07:33:51 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =	srcs/chars/ft_isalnum.c \
 	srcs/malloc/ft_bzero.c \
 	srcs/malloc/ft_calloc.c \
 	srcs/malloc/ft_free_2d_arr.c \
+	srcs/malloc/ft_free_3d_arr.c \
 	srcs/malloc/ft_free_args.c \
 	srcs/malloc/ft_free.c \
 	srcs/memory/ft_memchr.c \
