@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:32:49 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 09:18:43 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/15 03:40:16 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ typedef struct s_pipx
 	int		command_count;
 	int		set_cmd;
 	int		exec_av_count;
+	int		heredoc;
 	pid_t	last_child_pid;
+	char	*delimiter;
 	char	***execve_av;
 	char	**av;
 	char	**env;

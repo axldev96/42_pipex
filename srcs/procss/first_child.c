@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:55:23 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 14:39:08 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/15 04:25:32 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	first_child(t_pipx *pipx, int *fd)
 		close(fd[1]);
 		close(pipx->infile);
 		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
-		perror("execve");
+		perror("execve 1child");
 	}
 	else
 		ft_free((void *)&cmd_path);

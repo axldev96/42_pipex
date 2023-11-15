@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:31:44 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/13 09:18:23 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/15 04:04:00 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MAIN_TARGET = all
 
 CC = gcc
 
-C_FLAGS =  -Wall -Wextra -Werror -std=c99# -fsanitize=address -g3
+C_FLAGS =  -Wall -Wextra -Werror -std=c99 -fsanitize=address -g3
 
 $(RM) = rm -rf
 

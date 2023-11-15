@@ -6,19 +6,18 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:06 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/13 15:59:30 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/15 03:50:57 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	process_success(t_pipx *pipx, int *fd, int *fd_aux)
+static void	process_success(t_pipx *pipx, int *fd)
 {
 	ft_free_3d_arr((void ****)&pipx->execve_av);
+	unlink(".heredoc");
 	close(fd[0]);
 	close(fd[1]);
-	close(fd_aux[0]);
-	close(fd_aux[1]);
 	close(pipx->infile);
 	close(pipx->outfile);
 	exit(EXIT_SUCCESS);
@@ -60,9 +59,11 @@ void	parent(t_pipx *pipx)
 	{
 		exec_middles(pipx, fd_aux, fd_tmp);
 		last_child(pipx, fd_aux);
+		close(fd_aux[0]);
+		close(fd_aux[1]);
 	}
 	else
 		last_child(pipx, fd);
 	waitpid(pipx->last_child_pid, NULL, 0);
-	process_success(pipx, fd, fd_aux);
+	process_success(pipx, fd);
 }
