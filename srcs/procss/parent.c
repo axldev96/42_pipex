@@ -15,7 +15,7 @@
 static void	process_success(t_pipx *pipx, int *fd)
 {
 	// review path
-	//ft_free_3d_arr((void ****)&pipx->execve_av);
+	ft_free_3d_arr((void ****)&pipx->execve_av);
 	unlink(".heredoc");
 	close(fd[0]);
 	close(fd[1]);
@@ -30,6 +30,7 @@ static void	exec_middles(t_pipx *pipx, int *fd_aux, int *fd_tmp)
 	{
 		if (pipe(fd_aux) == SYSCALL_ERROR)
 		{
+			ft_free_3d_arr((void ****)&pipx->execve_av);
 			printf("pipe(): middle function error\n");
 			exit(EXIT_FAILURE);
 		}
@@ -53,6 +54,7 @@ void	parent(t_pipx *pipx)
 	j = 0;
 	if (pipe(fd) == SYSCALL_ERROR)
 	{
+		ft_free_3d_arr((void ****)&pipx->execve_av);
 		printf("pipe(): function error\n");
 		exit(EXIT_FAILURE);
 	}

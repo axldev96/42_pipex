@@ -26,6 +26,7 @@ void	first_child(t_pipx *pipx, int *fd)
 	pipx->first_pid = fork();
 	if (pipx->first_pid == SYSCALL_ERROR)
 	{
+		ft_free_3d_arr((void ****)&pipx->execve_av);
 		printf("error in fork first child\n");
 		exit(EXIT_FAILURE);
 	}
@@ -39,6 +40,7 @@ void	first_child(t_pipx *pipx, int *fd)
 		close(fd[1]);
 		close(pipx->infile);
 		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
+		ft_free_3d_arr((void ****)&pipx->execve_av);
 		exit(EXIT_FAILURE);
 	}
 	else

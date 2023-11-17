@@ -45,6 +45,8 @@ void	args(t_pipx *pipx)
 			write(2, pipx->av[1], ft_strlen(pipx->av[1]));
 			write(2,": ", 2);
 			write(2, "No such file or directory\n", 26);
+			ft_free_3d_arr((void ****)&pipx->execve_av);
+			exit(EXIT_FAILURE);
 		}
 		pipx->command_count = pipx->ac - 5;
 		pipx->outfile = open(pipx->av[pipx->ac - 1],

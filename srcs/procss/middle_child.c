@@ -21,6 +21,7 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 	mid_pid = fork();
 	if (mid_pid == SYSCALL_ERROR)
 	{
+		ft_free_3d_arr((void ****)&pipx->execve_av);
 		printf("error in fork middle child\n");
 		exit(EXIT_FAILURE);
 	}
@@ -33,6 +34,7 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 		close(fd[0]);
 		close(fd_aux[1]);
 		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
+		ft_free_3d_arr((void ****)&pipx->execve_av);
 		exit(EXIT_FAILURE);
 	}
 	else

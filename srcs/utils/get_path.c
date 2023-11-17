@@ -106,6 +106,8 @@ char	*get_path(t_pipx *pipx, char *path)
 		write(2, path, ft_strlen(path));
 		write(2,": ", 2);
 		write(2, "command not found\n", 18);
+		ft_free_3d_arr((void ****)&pipx->execve_av);
+		exit(EXIT_FAILURE);
 	}
 	return (command);
 }

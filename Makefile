@@ -16,7 +16,7 @@ MAIN_TARGET = all
 
 CC = gcc
 
-C_FLAGS =  -Wall -Wextra -Werror -std=c99 #-fsanitize=address -g3
+C_FLAGS =  -Wall -Wextra -Werror -std=c99 -fsanitize=address -g3
 
 $(RM) = rm -rf
 
