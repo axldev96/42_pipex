@@ -14,11 +14,29 @@
 
 void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 {
-	char	*cmd_path;
 	pid_t	mid_pid;
+	char	*cmd_path;
+	char	*cmd;
 
-	cmd_path = get_path(pipx, pipx->execve_av[++pipx->exec_av_count][0]);
+	pipx->exec_av_count++;
+	if (pipx->av[pipx->exec_av_count + pipx->heredoc + 2][0] == '\0'
+			|| pipx->av[pipx->exec_av_count + pipx->heredoc + 2][0] == ' ')
+	{
+		cmd = ft_strdup(pipx->av[pipx->exec_av_count + pipx->heredoc + 2]);
+		cmd_path = get_path(pipx, cmd);
+		ft_free((void *)&cmd);
+	}
+	else
+	{
+		cmd = pipx->execve_av[pipx->exec_av_count][0];
+		cmd_path = get_path(pipx, cmd);
+	}
 	mid_pid = fork();
+	if (!pipx->execve_av[pipx->exec_av_count][0])
+	{
+		ft_free_3d_arr((void ****)&pipx->execve_av);
+		exit(EXIT_FAILURE);
+	}
 	if (mid_pid == SYSCALL_ERROR)
 	{
 		ft_free_3d_arr((void ****)&pipx->execve_av);
@@ -33,13 +51,11 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 		dup2(fd_aux[1], 1);
 		close(fd[0]);
 		close(fd_aux[1]);
+
 		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
 		ft_free_3d_arr((void ****)&pipx->execve_av);
 		exit(EXIT_FAILURE);
 	}
 	else
-	{
-	//	waitpid(mid_pid, NULL, 0);
 		ft_free((void *)&cmd_path);
-	}
 }

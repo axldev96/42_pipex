@@ -27,6 +27,9 @@ void	get_execve_av(t_pipx *pipx)
 		return ;
 	while (i < (pipx->ac - 1))
 	{
+		//if (pipx->av[i][0] == '\0' || pipx->av[i][0] == ' ')
+		//	pipx->execve_av[j] = ft_split(pipx->av[i++], '\0');
+		//else
 		pipx->execve_av[j++] = ft_split(pipx->av[i++], ' ');
 	}
 	pipx->execve_av[j] = NULL;
