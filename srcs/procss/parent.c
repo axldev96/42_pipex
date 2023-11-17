@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:06 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/17 03:25:49 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/17 04:59:26 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,11 @@ void	parent(t_pipx *pipx)
 	int	fd[2];
 	int	fd_aux[2];
 	int	fd_tmp[2];
+	int	i;
+	int	j;
 
+	i = pipx->command_count + 2;
+	j = 0;
 	if (pipe(fd) == SYSCALL_ERROR)
 	{
 		printf("pipe(): function error\n");
@@ -65,6 +69,11 @@ void	parent(t_pipx *pipx)
 	}
 	else
 		last_child(pipx, fd);
-	waitpid(pipx->last_child_pid, NULL, 0);
+	//waitpid(pipx->last_child_pid, NULL, 0);
+	while (j < i)
+	{
+		waitpid(-1, NULL, 0);
+		j++;
+	}
 	process_success(pipx, fd);
 }
