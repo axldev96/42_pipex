@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 06:11:13 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/15 04:47:58 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/17 01:36:47 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	get_execve_av(t_pipx *pipx)
 		return ;
 	while (i < (pipx->ac - 1))
 	{
-		pipx->execve_av[j] = ft_split(pipx->av[i], ' ');
-		j++;
-		i++;
+		pipx->execve_av[j++] = ft_split(pipx->av[i++], ' ');
 	}
 	pipx->execve_av[j] = NULL;
 }

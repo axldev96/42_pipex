@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:38:07 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/15 05:07:29 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/17 01:27:56 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	args(t_pipx *pipx)
 		pipx->infile = open(pipx->av[1], O_RDONLY);
 		if (pipx->infile == SYSCALL_ERROR)
 		{
-			printf("Infile open error\n");
-			exit(EXIT_FAILURE);
+			write(2, "bash: ", 6);
+			write(2, pipx->av[1], ft_strlen(pipx->av[1]));
+			write(2,": ", 2);
+			write(2, "No such file or directory\n", 26);
 		}
 		pipx->command_count = pipx->ac - 5;
 		pipx->outfile = open(pipx->av[pipx->ac - 1],

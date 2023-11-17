@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:12:46 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/15 04:09:01 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/17 02:11:32 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static char
 
 	i = 0;
 	tmp = NULL;
+	if (command[0] == '\0')
+		return (NULL);
 	while (path_arr[i])
 	{
 		tmp = ft_strjoin(path_arr[i], "/");
@@ -77,9 +79,15 @@ static char	*get_relative_path(t_pipx *pipx, char *command)
 
 static char	*get_absolute_path(char *path)
 {
+	size_t	path_len;
+
+	path_len = 0;
+	if (!path || !path[0])
+		return (NULL);
+	path_len = ft_strlen(path);
 	if (!ft_strncmp(path, "/", 1)
-		|| !ft_strncmp(path, "./", 2)
-		|| !ft_strncmp(path, "../", 3))
+		|| (path_len >= 2 && !ft_strncmp(path, "./", 2))
+		|| (path_len >= 3 && !ft_strncmp(path, "../", 3)))
 		return (ft_strdup(path));
 	return (NULL);
 }
@@ -92,5 +100,12 @@ char	*get_path(t_pipx *pipx, char *path)
 	if (command)
 		return (command);
 	command = get_relative_path(pipx, path);
+	if (!command)
+	{
+		write(2, "bash: ", 6);
+		write(2, path, ft_strlen(path));
+		write(2,": ", 2);
+		write(2, "command not found\n", 18);
+	}
 	return (command);
 }

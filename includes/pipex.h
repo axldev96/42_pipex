@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:32:49 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/15 03:40:16 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/17 03:18:58 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_pipx
 	int		set_cmd;
 	int		exec_av_count;
 	int		heredoc;
+	pid_t	first_pid;
 	pid_t	last_child_pid;
 	char	*delimiter;
 	char	***execve_av;
@@ -49,6 +50,9 @@ typedef struct s_pipx
 void	set_pipx(t_pipx *pipx, int ac, char **av, char **env);
 void	get_execve_av(t_pipx *pipx);
 void	heredoc(t_pipx *pipx);
+void	print_error(char *str);
+void	print_error_usage(void);
+void	command_error(void);
 
 // PROCSS
 void	parent(t_pipx *pipx);

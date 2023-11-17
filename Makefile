@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:31:44 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/15 04:04:00 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/17 03:20:42 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MAIN_TARGET = all
 
 CC = gcc
 
-C_FLAGS =  -Wall -Wextra -Werror -std=c99 -fsanitize=address -g3
+C_FLAGS =  -Wall -Wextra -Werror -std=c99 #-fsanitize=address -g3
 
 $(RM) = rm -rf
 
@@ -28,6 +28,7 @@ SRCS_FILES = procss/parent.c \
 			 utils/get_path.c \
 			 utils/get_execve_av.c \
 			 utils/heredoc.c \
+			 utils/error_handler.c \
 			 args/args.c \
 			 main.c
 
