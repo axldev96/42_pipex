@@ -18,7 +18,7 @@
 # include <stdarg.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 3
 # endif
 
 // Define structs for linked list bonus

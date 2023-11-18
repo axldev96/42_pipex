@@ -106,5 +106,7 @@ static char	*reset_rec(char *rec, int line_len)
 	ft_free((void *)&rec);
 	if (!new_rec)
 		return (NULL);
+	if (new_rec[0] == '\0')
+		return (ft_free((void *)&new_rec), NULL);
 	return (new_rec);
 }
