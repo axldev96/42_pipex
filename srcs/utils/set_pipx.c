@@ -22,10 +22,10 @@ void	set_pipx(t_pipx *pipx, int ac, char **av, char **env)
 	pipx->set_cmd = 2 + pipx->heredoc;
 	pipx->aqui = 0;
 	pipx->ac = ac;
+	pipx->delimiter = NULL;
 	pipx->execve_av = NULL;
 	pipx->exec_av_count = 0;
 	pipx->env = env;
 	pipx->av = av;
 	pipx->command_count = -1;
-	pipx->last_child_pid = -1;
 }
