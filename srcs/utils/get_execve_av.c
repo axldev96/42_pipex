@@ -19,18 +19,10 @@ void	get_execve_av(t_pipx *pipx)
 
 	j = 0;
 	i = 2 + pipx->heredoc;
-	if (pipx->heredoc)
-		pipx->execve_av = malloc(sizeof(char *) * (pipx->ac - 4 + 1));
-	else
-		pipx->execve_av = malloc(sizeof(char *) * (pipx->ac - 3 + 1));
+	pipx->execve_av = malloc(sizeof(char *) * (pipx->ac - 3 - pipx->heredoc + 1));
 	if (!pipx->execve_av)
 		return ;
 	while (i < (pipx->ac - 1))
-	{
-		//if (pipx->av[i][0] == '\0' || pipx->av[i][0] == ' ')
-		//	pipx->execve_av[j] = ft_split(pipx->av[i++], '\0');
-		//else
 		pipx->execve_av[j++] = ft_split(pipx->av[i++], ' ');
-	}
 	pipx->execve_av[j] = NULL;
 }

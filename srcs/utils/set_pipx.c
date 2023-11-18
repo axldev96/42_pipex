@@ -20,6 +20,7 @@ void	set_pipx(t_pipx *pipx, int ac, char **av, char **env)
 	pipx->infile = -1;
 	pipx->outfile = -1;
 	pipx->set_cmd = 2 + pipx->heredoc;
+	pipx->aqui = 0;
 	pipx->ac = ac;
 	pipx->execve_av = NULL;
 	pipx->exec_av_count = 0;

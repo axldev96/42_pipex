@@ -38,6 +38,7 @@ typedef struct s_pipx
 	int		set_cmd;
 	int		exec_av_count;
 	int		heredoc;
+	int		aqui;
 	pid_t	first_pid;
 	pid_t	last_child_pid;
 	char	*delimiter;

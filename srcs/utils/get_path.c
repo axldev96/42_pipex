@@ -77,7 +77,7 @@ static char	*get_relative_path(t_pipx *pipx, char *command)
 	return (full_command);
 }
 
-static char	*get_absolute_path(char *path)
+static char	*get_absolute_path(char *path, int *abs)
 {
 	size_t	path_len;
 
@@ -88,18 +88,25 @@ static char	*get_absolute_path(char *path)
 	if (!ft_strncmp(path, "/", 1)
 		|| (path_len >= 2 && !ft_strncmp(path, "./", 2))
 		|| (path_len >= 3 && !ft_strncmp(path, "../", 3)))
-		return (ft_strdup(path));
+	{
+		*abs = 1;
+		if (access(path, X_OK) == 0)
+			return (ft_strdup(path));
+	}
 	return (NULL);
 }
 
 char	*get_path(t_pipx *pipx, char *path)
 {
 	char	*command;
+	int		abs;
 
-	command = get_absolute_path(path);
+	abs = 0;
+	command = get_absolute_path(path, &abs);
 	if (command)
 		return (command);
-	command = get_relative_path(pipx, path);
+	if (!abs)
+		command = get_relative_path(pipx, path);
 	if (!command)
 	{
 		write(2, "bash: ", 6);
@@ -108,6 +115,7 @@ char	*get_path(t_pipx *pipx, char *path)
 		write(2, "command not found\n", 18);
 		//ft_free_3d_arr((void ****)&pipx->execve_av);
 		//exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	return (command);
 }

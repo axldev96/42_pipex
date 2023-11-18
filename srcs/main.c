@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	t_pipx	pipx;
 
 	//atexit(ft_leaks);
-	if (ac < 5 && av && env)
+	if (ac < 5)
 		return (print_error_usage(), 0);
 	set_pipx(&pipx, ac, av, env);
 	args(&pipx);

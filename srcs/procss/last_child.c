@@ -31,8 +31,6 @@ void	last_child(t_pipx *pipx, int *fd)
 		cmd = pipx->execve_av[pipx->exec_av_count][0];
 		cmd_path = get_path(pipx, cmd);
 	}
-		printf("trahs: %s\n", pipx->execve_av[pipx->exec_av_count][0]);
-	//printf("cmd: %s\n", cmd);
 	last_pid = fork();
 	if (last_pid == SYSCALL_ERROR)
 	{
@@ -47,7 +45,7 @@ void	last_child(t_pipx *pipx, int *fd)
 		dup2(fd[0], 0);
 		dup2(pipx->outfile, 1);
 		close(fd[0]);
-		if (!pipx->execve_av[pipx->exec_av_count][0])
+		if (!pipx->execve_av[pipx->exec_av_count][0] || !cmd_path)
 		{
 			ft_free_3d_arr((void ****)&pipx->execve_av);
 			exit(EXIT_FAILURE);

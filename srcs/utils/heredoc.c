@@ -29,15 +29,17 @@ void	heredoc(t_pipx *pipx)
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
-		if (!line || !ft_strncmp(delimiter, line, delimiter_len))
+		if (line == NULL || !ft_strncmp(delimiter, line, delimiter_len))
 			break ;
 		w = write(pipx->infile, line, ft_strlen(line));
-		ft_free((void *)&line);
 		if (w == SYSCALL_ERROR)
 		{
+			ft_free((void *)&line);
+			ft_free((void *)&delimiter);
 			printf("Error writing in heredoc file\n");
 			exit(EXIT_FAILURE);
 		}
+		ft_free((void *)&line);
 	}
 	ft_free((void *)&line);
 	ft_free((void *)&delimiter);

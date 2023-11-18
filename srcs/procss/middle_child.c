@@ -32,11 +32,6 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 		cmd_path = get_path(pipx, cmd);
 	}
 	mid_pid = fork();
-	if (!pipx->execve_av[pipx->exec_av_count][0])
-	{
-		ft_free_3d_arr((void ****)&pipx->execve_av);
-		exit(EXIT_FAILURE);
-	}
 	if (mid_pid == SYSCALL_ERROR)
 	{
 		ft_free_3d_arr((void ****)&pipx->execve_av);
@@ -51,7 +46,11 @@ void	middle_child(t_pipx *pipx, int *fd, int *fd_aux)
 		dup2(fd_aux[1], 1);
 		close(fd[0]);
 		close(fd_aux[1]);
-
+		if (!pipx->execve_av[pipx->exec_av_count][0] || !cmd_path)
+		{
+			ft_free_3d_arr((void ****)&pipx->execve_av);
+			exit(EXIT_FAILURE);
+		}
 		execve(cmd_path, pipx->execve_av[pipx->exec_av_count], pipx->env);
 		ft_free_3d_arr((void ****)&pipx->execve_av);
 		exit(EXIT_FAILURE);

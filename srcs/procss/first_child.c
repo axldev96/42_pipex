@@ -19,10 +19,16 @@ void	first_child(t_pipx *pipx, int *fd)
 
 	if (pipx->av[pipx->exec_av_count + pipx->heredoc + 2][0] == '\0'
 			|| pipx->av[pipx->exec_av_count + pipx->heredoc + 2][0] == ' ')
+	{
 		cmd = ft_strdup(pipx->av[pipx->exec_av_count + pipx->heredoc + 2]);
+		cmd_path = get_path(pipx, cmd);
+		ft_free((void *)&cmd);
+	}
 	else
+	{
 		cmd = pipx->execve_av[pipx->exec_av_count][0];
-	cmd_path = get_path(pipx, cmd);
+		cmd_path = get_path(pipx, cmd);
+	}
 	pipx->first_pid = fork();
 	if (pipx->first_pid == SYSCALL_ERROR)
 	{
@@ -39,7 +45,7 @@ void	first_child(t_pipx *pipx, int *fd)
 		dup2(fd[1], 1);
 		close(fd[1]);
 		close(pipx->infile);
-		if (!pipx->execve_av[pipx->exec_av_count][0])
+		if (!pipx->execve_av[pipx->exec_av_count][0] || !cmd_path)
 		{
 			ft_free_3d_arr((void ****)&pipx->execve_av);
 			exit(EXIT_FAILURE);
@@ -49,8 +55,5 @@ void	first_child(t_pipx *pipx, int *fd)
 		exit(EXIT_FAILURE);
 	}
 	else
-	{
-		//waitpid(pipx->first_pid, NULL, 0);
 		ft_free((void *)&cmd_path);
-	}
 }
