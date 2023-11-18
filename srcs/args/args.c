@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:38:07 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/17 01:27:56 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:34:46 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	args_heredoc(t_pipx *pipx)
 	pipx->infile = open(".heredoc", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (pipx->infile == SYSCALL_ERROR)
 	{
-		printf("args: here_doc open error\n");
+		perror("bash: ");
 		exit(EXIT_FAILURE);
 	}
 	pipx->delimiter = pipx->av[2];
@@ -27,7 +27,7 @@ static void	args_heredoc(t_pipx *pipx)
 			S_IRUSR | S_IWUSR);
 	if (pipx->outfile == SYSCALL_ERROR)
 	{
-		printf("outfile open error\n");
+		perror("bash: ");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -43,7 +43,7 @@ void	args(t_pipx *pipx)
 		{
 			write(2, "bash: ", 6);
 			write(2, pipx->av[1], ft_strlen(pipx->av[1]));
-			write(2,": ", 2);
+			write(2, ": ", 2);
 			write(2, "No such file or directory\n", 26);
 			ft_free_3d_arr((void ****)&pipx->execve_av);
 			exit(EXIT_FAILURE);
@@ -54,7 +54,7 @@ void	args(t_pipx *pipx)
 				S_IRUSR | S_IWUSR);
 		if (pipx->outfile == SYSCALL_ERROR)
 		{
-			printf("outfile open error\n");
+			perror("bash: ");
 			exit(EXIT_FAILURE);
 		}
 	}

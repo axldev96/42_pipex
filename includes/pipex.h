@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:32:49 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/17 03:18:58 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:37:57 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 
 # ifndef SYSCALL_ERROR
 #  define SYSCALL_ERROR -1
+# endif
+
+# ifndef HEREDOC_FILE
+#  define HEREDOC_FILE ".heredoc"
+# endif
+
+# ifndef HERE_PROMPT
+#  define HERE_PROMPT "> "
 # endif
 
 # ifndef PATH
@@ -51,6 +59,9 @@ void	heredoc(t_pipx *pipx);
 void	print_error(char *str);
 void	print_error_usage(void);
 void	command_error(void);
+void	command_not_found(char *path);
+char	*check_command(t_pipx *pipx, char **cmd_path);
+void	print_err_exit(char *error);
 
 // PROCSS
 void	parent(t_pipx *pipx);

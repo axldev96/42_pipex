@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:31:44 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/17 03:20:42 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/18 12:41:09 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_FILES = procss/parent.c \
 			 utils/get_execve_av.c \
 			 utils/heredoc.c \
 			 utils/error_handler.c \
+			 utils/check_command.c \
 			 args/args.c \
 			 main.c
 
@@ -47,8 +48,6 @@ LIBFT = $(LIBFT_DIR)libft.a
 INC_FLAGS = -I $(INC_DIR)
 INC_FLAGS += -I $(LIBFT_DIR)/$(INC_DIR)
 
-LD_FLAGS = 
-
 %.o: %.c
 	$(CC) $(C_FLAGS) $(INC_FLAGS) -c $< -o $@
 
@@ -56,7 +55,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(C_FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+	$(MAKE) -sC $(LIBFT_DIR)
 
 all: $(NAME)
 
@@ -64,11 +63,11 @@ re: fclean
 	$(MAKE) $(MAIN_TARGET)
 
 clean:
-	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -sC $(LIBFT_DIR)
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -sC $(LIBFT_DIR)
 	$(RM) $(NAME)
 
 .PHONY: all clean fclean re

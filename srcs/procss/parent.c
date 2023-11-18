@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:06 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/17 04:59:26 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 12:38:06 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 static void	process_success(t_pipx *pipx, int *fd)
 {
-	// review path
 	ft_free_3d_arr((void ****)&pipx->execve_av);
-	unlink(".heredoc");
+	unlink(HEREDOC_FILE);
 	close(fd[0]);
 	close(fd[1]);
 	close(pipx->infile);
@@ -26,38 +25,29 @@ static void	process_success(t_pipx *pipx, int *fd)
 
 static void	exec_middles(t_pipx *pipx, int *fd_aux, int *fd_tmp)
 {
-	while (pipx->command_count)
+	int	i;
+
+	i = -1;
+	while (++i < pipx->command_count)
 	{
 		if (pipe(fd_aux) == SYSCALL_ERROR)
 		{
 			ft_free_3d_arr((void ****)&pipx->execve_av);
-			printf("pipe(): middle function error\n");
+			perror("bash: ");
 			exit(EXIT_FAILURE);
 		}
 		middle_child(pipx, fd_tmp, fd_aux);
 		close(fd_aux[1]);
 		fd_tmp[0] = fd_aux[0];
 		fd_tmp[1] = fd_aux[1];
-		pipx->command_count--;
 	}
 }
 
-void	parent(t_pipx *pipx)
+static void	exec_childs(t_pipx *pipx, int *fd)
 {
-	int	fd[2];
 	int	fd_aux[2];
 	int	fd_tmp[2];
-	int	i;
-	int	j;
 
-	i = pipx->command_count + 2;
-	j = 0;
-	if (pipe(fd) == SYSCALL_ERROR)
-	{
-		ft_free_3d_arr((void ****)&pipx->execve_av);
-		printf("pipe(): function error\n");
-		exit(EXIT_FAILURE);
-	}
 	first_child(pipx, fd);
 	fd_tmp[0] = fd[0];
 	fd_tmp[1] = fd[1];
@@ -71,11 +61,22 @@ void	parent(t_pipx *pipx)
 	}
 	else
 		last_child(pipx, fd);
-	//waitpid(pipx->last_child_pid, NULL, 0);
-	while (j < i)
+}
+
+void	parent(t_pipx *pipx)
+{
+	int	fd[2];
+	int	i;
+
+	i = -1;
+	if (pipe(fd) == SYSCALL_ERROR)
 	{
-		waitpid(-1, NULL, 0);
-		j++;
+		ft_free_3d_arr((void ****)&pipx->execve_av);
+		perror("bash: ");
+		exit(EXIT_FAILURE);
 	}
+	exec_childs(pipx, fd);
+	while (++i < pipx->command_count + 2)
+		waitpid(-1, NULL, 0);
 	process_success(pipx, fd);
 }

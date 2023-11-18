@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 19:12:46 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/17 02:11:32 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 10:20:27 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,14 +108,6 @@ char	*get_path(t_pipx *pipx, char *path)
 	if (!abs)
 		command = get_relative_path(pipx, path);
 	if (!command)
-	{
-		write(2, "bash: ", 6);
-		write(2, path, ft_strlen(path));
-		write(2,": ", 2);
-		write(2, "command not found\n", 18);
-		//ft_free_3d_arr((void ****)&pipx->execve_av);
-		//exit(EXIT_FAILURE);
-		return (NULL);
-	}
+		return (command_not_found(path), NULL);
 	return (command);
 }

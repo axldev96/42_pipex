@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:40:38 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/15 05:07:46 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 09:09:50 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	set_pipx(t_pipx *pipx, int ac, char **av, char **env)
 	pipx->infile = -1;
 	pipx->outfile = -1;
 	pipx->set_cmd = 2 + pipx->heredoc;
-	pipx->aqui = 0;
 	pipx->ac = ac;
 	pipx->delimiter = NULL;
 	pipx->execve_av = NULL;
