@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:52:06 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/18 12:38:06 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:52:43 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ static void	exec_childs(t_pipx *pipx, int *fd)
 	fd_tmp[0] = fd[0];
 	fd_tmp[1] = fd[1];
 	close(fd[1]);
-	if (pipx->command_count > 0)
+	if (pipx->command_count > 0 && BONUS)
 	{
 		exec_middles(pipx, fd_aux, fd_tmp);
 		last_child(pipx, fd_aux);
 		close(fd_aux[0]);
 		close(fd_aux[1]);
 	}
+	else if (pipx->command_count > 0 && !BONUS)
+		print_error_usage();
 	else
 		last_child(pipx, fd);
 }

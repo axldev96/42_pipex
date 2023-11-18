@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:32:49 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/18 12:37:57 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:08:12 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include "libft.h"
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # ifndef SYSCALL_ERROR
 #  define SYSCALL_ERROR -1

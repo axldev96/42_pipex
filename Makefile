@@ -6,7 +6,7 @@
 #    By: acaceres <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 09:31:44 by acaceres          #+#    #+#              #
-#    Updated: 2023/11/18 12:41:09 by acaceres         ###   ########.fr        #
+#    Updated: 2023/11/18 13:27:09 by acaceres         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,8 +66,11 @@ clean:
 	$(MAKE) clean -sC $(LIBFT_DIR)
 	$(RM) $(OBJS)
 
+bonus: C_FLAGS += -D BONUS=1
+bonus: $(NAME)
+
 fclean: clean
 	$(MAKE) fclean -sC $(LIBFT_DIR)
 	$(RM) $(NAME)
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

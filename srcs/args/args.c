@@ -6,7 +6,7 @@
 /*   By: acaceres <acaceres@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 22:38:07 by acaceres          #+#    #+#             */
-/*   Updated: 2023/11/18 12:34:46 by acaceres         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:37:17 by acaceres         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	args_heredoc(t_pipx *pipx)
 {
-	pipx->infile = open(".heredoc", O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	pipx->infile = open(HEREDOC_FILE, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (pipx->infile == SYSCALL_ERROR)
 	{
 		perror("bash: ");
